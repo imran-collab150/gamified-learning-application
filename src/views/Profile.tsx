@@ -1,7 +1,7 @@
 import { useGameStore } from '../stores/gameStore';
 import Header from '../components/ui/Header';
 
-export default function Profile() {
+export default function Profile({ onToggleSidebar }: { onToggleSidebar: () => void }) {
   const { user, streak } = useGameStore();
   const requiredXP = 100 * Math.pow(user.level, 1.5);
   const xpPercent = Math.min((user.xp / requiredXP) * 100, 100);
@@ -13,9 +13,9 @@ export default function Profile() {
         <div className="particle top-[50%] left-[15%] w-1.5 h-1.5" style={{ animationDelay: '3s', background: 'rgba(59, 130, 246, 0.4)' }} />
       </div>
 
-      <Header />
-      <main className="relative z-10 pt-2">
-        <div className="mx-4 mb-4">
+      <Header onToggleSidebar={onToggleSidebar} />
+      <main className="relative z-10 pt-2 main-content">
+        <div className="max-w-7xl mx-auto px-6 py-8">
           <h2 className="text-2xl font-bold gradient-text mb-4">Profile</h2>
           <div className="glass-card rounded-2xl p-6 animate-fade-in-up">
             <div className="flex items-center gap-4 mb-6">

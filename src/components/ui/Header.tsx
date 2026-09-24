@@ -10,7 +10,7 @@ function setTheme(theme: string) {
   document.documentElement.setAttribute('data-theme', theme);
 }
 
-export default function Header() {
+export default function Header({ onToggleSidebar }: { onToggleSidebar: () => void }) {
   const { user } = useGameStore();
   const isDark = getTheme() === 'dark';
 
@@ -21,17 +21,23 @@ export default function Header() {
   };
 
   return (
-    <header className="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between border-b border-transparent">
+    <header className="glass sticky top-0 z-50 px-6 py-3 flex items-center justify-between border-b border-transparent">
       <div className="flex items-center gap-3">
+        <button
+          onClick={onToggleSidebar}
+          className="touch-target w-10 h-10 rounded-lg glass flex items-center justify-center text-lg border border-transparent hover:border-white/20 transition-all duration-300 hidden md:flex"
+        >
+          ☰
+        </button>
         <div className="touch-target w-11 h-11 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-xl animate-pulse-glow">
           ⚡📚
         </div>
         <span className="text-lg font-bold gradient-text">MicroLearn</span>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="touch-target glass rounded-full px-3 py-1.5 flex items-center gap-2">
+      <div className="flex items-center gap-3">
+        <div className="touch-target glass rounded-full px-4 py-2 flex items-center gap-2">
           <span className="text-yellow-400 text-sm">⚡</span>
-          <span className="text-sm font-semibold gradient-text-warm">{user.xp}</span>
+          <span className="text-sm font-semibold gradient-text-warm">{user.xp} XP</span>
         </div>
         <div className="relative touch-target">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm avatar-ring">

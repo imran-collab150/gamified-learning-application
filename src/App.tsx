@@ -10,7 +10,7 @@ export default function App() {
     <div className="min-h-screen">
       {page === 'home' && <Home />}
       {page === 'lesson' && <LessonView />}
-      {page === 'profile' && <Profile />}
+      {page === 'profile' && <Profile onToggleSidebar={() => {}} />}
     </div>
   );
 }
