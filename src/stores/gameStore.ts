@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { dbPut } from '../lib/db';
+import { addToQueue } from '../lib/syncQueue';
 
 interface Category {
   id: string;
@@ -36,11 +37,6 @@ interface GameState {
   resetStreak: () => void;
   activateStreakFreeze: () => void;
   completeLesson: (lessonId: string) => void;
-}
-
-async function enqueueSync(item: { type: 'progress' | 'telemetry'; payload: unknown }) {
-  const { addToQueue } = await import('../lib/syncQueue');
-  await addToQueue(item);
 }
 
 export const useGameStore = create<GameState>()(
@@ -153,6 +149,7 @@ export const useGameStore = create<GameState>()(
             xpEarned: amount,
             timestamp: Date.now(),
           });
+          addToQueue({ type: 'progress', payload: { lessonId: 'system', status: 'completed' } });
         } else {
           set({ user: { ...get().user, xp: newXP } });
         }
@@ -166,16 +163,16 @@ export const useGameStore = create<GameState>()(
 
       activateStreakFreeze: () => set({ streakFreeze: true }),
 
-      completeLesson: async (lessonId: string) => {
+      completeLesson: (lessonId: string) => {
         set({ completedLessons: [...get().completedLessons, lessonId] });
-        await dbPut('progress', {
+        dbPut('progress', {
           id: lessonId,
           lessonId,
           status: 'completed',
           xpEarned: 10,
           timestamp: Date.now(),
         });
-        await enqueueSync({ type: 'progress', payload: { lessonId, status: 'completed' } });
+        addToQueue({ type: 'progress', payload: { lessonId, status: 'completed' } });
       },
     }),
     {

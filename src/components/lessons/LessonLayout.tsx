@@ -4,6 +4,7 @@ import MCQ from './MCQ';
 import CodeFix from './CodeFix';
 import Matching from './Matching';
 import { useGameStore } from '../../stores/gameStore';
+import { withViewTransition } from '../../hooks/useViewTransition';
 
 interface Lesson {
   id: string;
@@ -25,11 +26,11 @@ export default function LessonLayout({ lesson }: { lesson: Lesson }) {
 
   const handleTaskComplete = () => {
     setTaskComplete(true);
-    completeLesson(lesson.id);
+    withViewTransition(() => completeLesson(lesson.id));
   };
 
   return (
-    <div className="space-y-6 p-4">
+    <div className="space-y-6 p-4 pb-24 sm:pb-6">
       <h2 className="text-2xl font-bold">{lesson.title}</h2>
       <div className="bg-gray-900 p-6 rounded-lg">
         <MarkdownRenderer content={lesson.content} />
