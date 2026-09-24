@@ -1,6 +1,6 @@
 import { useGameStore } from '../../stores/gameStore';
 
-function ProgressRing({ progress, size = 80, strokeWidth = 6, color = '#3B82F6' }: { progress: number; size?: number; strokeWidth?: number; color?: string }) {
+function ProgressRing({ progress, size = 80, strokeWidth = 6, color = '#3b82f6' }: { progress: number; size?: number; strokeWidth?: number; color?: string }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (progress / 100) * circumference;
@@ -12,7 +12,7 @@ function ProgressRing({ progress, size = 80, strokeWidth = 6, color = '#3B82F6' 
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#e5e7eb"
+          stroke="rgba(148, 163, 184, 0.15)"
           strokeWidth={strokeWidth}
           fill="none"
         />
@@ -26,11 +26,11 @@ function ProgressRing({ progress, size = 80, strokeWidth = 6, color = '#3B82F6' 
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
-          className="transition-all duration-1000 ease-out"
+          className="progress-ring-circle"
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-xl font-bold text-gray-900 dark:text-white">{Math.round(progress)}%</span>
+        <span className="text-xl font-bold gradient-text">{Math.round(progress)}%</span>
       </div>
     </div>
   );
@@ -43,36 +43,38 @@ export default function DailyGoals() {
   const completedDays = [true, true, true, true, true, false, false];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 mx-4 mb-4">
-      <div className="flex items-center justify-between mb-3">
+    <div className="glass-card rounded-2xl p-5 mx-4 mb-4 animate-fade-in-up">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Daily Goals</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Current Streak: <span className="text-orange-500 font-semibold">🔥 {streak} Days</span>
+          <h3 className="text-lg font-bold text-white">Daily Goals</h3>
+          <p className="text-sm text-gray-400 mt-1">
+            Current Streak: <span className="text-orange-400 font-semibold">🔥 {streak} Days</span>
           </p>
         </div>
-        <ProgressRing progress={dailyGoalProgress} />
+        <ProgressRing progress={dailyGoalProgress} color="#8b5cf6" />
       </div>
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex gap-1">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex gap-2">
           {days.map((day, i) => (
             <div
               key={day}
-              className={`touch-target w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
-                completedDays[i] ? 'bg-orange-400 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500'
+              className={`touch-target w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                completedDays[i]
+                  ? 'bg-gradient-to-br from-orange-400 to-orange-500 text-white shadow-lg shadow-orange-500/30 scale-110'
+                  : 'bg-white/5 text-gray-500'
               }`}
             >
               {day}
             </div>
           ))}
         </div>
-        <span className="text-sm text-gray-500 dark:text-gray-400">
+        <span className="text-sm text-gray-400">
           {modulesCompletedToday}/{modulesGoalToday} Modules
         </span>
       </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+      <div className="w-full bg-white/5 rounded-full h-2.5 overflow-hidden">
         <div
-          className="bg-gradient-to-r from-orange-400 to-orange-500 h-2 rounded-full transition-all duration-500"
+          className="h-2.5 rounded-full bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 transition-all duration-1000 ease-out"
           style={{ width: `${(modulesCompletedToday / modulesGoalToday) * 100}%` }}
         />
       </div>

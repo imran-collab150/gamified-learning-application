@@ -1,20 +1,11 @@
 import { useGameStore } from '../../stores/gameStore';
 
-function getStatusColor(status: string) {
+function getStatusStyles(status: string) {
   switch (status) {
-    case 'active': return 'bg-blue-100 text-blue-700';
-    case 'in-progress': return 'bg-purple-100 text-purple-700';
-    case 'locked': return 'bg-gray-100 text-gray-500';
-    default: return 'bg-gray-100 text-gray-500';
-  }
-}
-
-function getStatusLabel(status: string) {
-  switch (status) {
-    case 'active': return 'Start Path';
-    case 'in-progress': return 'Continue Path';
-    case 'locked': return 'Locked';
-    default: return 'Start Path';
+    case 'active': return 'bg-blue-500/20 text-blue-400 border border-blue-500/20';
+    case 'in-progress': return 'bg-purple-500/20 text-purple-400 border border-purple-500/20';
+    case 'locked': return 'bg-gray-500/20 text-gray-500 border border-gray-500/20';
+    default: return 'bg-gray-500/20 text-gray-500 border border-gray-500/20';
   }
 }
 
@@ -23,35 +14,39 @@ export default function LearningPaths() {
 
   return (
     <div className="mx-4 mb-4">
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Explore Learning Paths</h3>
+      <h3 className="text-xl font-bold text-white mb-4">Explore Learning Paths</h3>
       <div className="space-y-3">
-        {categories.map((cat) => (
+        {categories.map((cat, index) => (
           <div
             key={cat.id}
-            className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 touch-target"
+            className="glass-card rounded-xl p-4 cursor-pointer group animate-fade-in-up"
+            style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}
           >
             <div className="flex items-center gap-3">
               <div
-                className="touch-target w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                style={{ backgroundColor: `${cat.color}20` }}
+                className="touch-target w-14 h-14 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                style={{
+                  background: `linear-gradient(135deg, ${cat.color}20, ${cat.color}10)`,
+                  boxShadow: `0 4px 16px ${cat.color}20`,
+                }}
               >
                 {cat.icon}
               </div>
               <div className="flex-1">
-                <h4 className="font-bold text-gray-900 dark:text-white">{cat.title}</h4>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{cat.subtitle}</p>
+                <h4 className="font-bold text-white text-base">{cat.title}</h4>
+                <p className="text-sm text-gray-400 mt-0.5">{cat.subtitle}</p>
               </div>
               <div className="text-right">
                 {cat.status === 'locked' ? (
-                  <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(cat.status)}`}>
-                    {cat.status === 'locked' ? 'Locked' : 'Prerequisite Needed'}
+                  <span className={`text-xs px-2.5 py-1 rounded-full ${getStatusStyles(cat.status)}`}>
+                    🔒 Locked
                   </span>
                 ) : cat.status === 'in-progress' ? (
-                  <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(cat.status)}`}>
+                  <span className={`text-xs px-2.5 py-1 rounded-full ${getStatusStyles(cat.status)}`}>
                     Lvl {cat.level} · {cat.completed}/{cat.modules}
                   </span>
                 ) : (
-                  <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(cat.status)}`}>
+                  <span className={`text-xs px-2.5 py-1 rounded-full ${getStatusStyles(cat.status)}`}>
                     {cat.modules} Modules
                   </span>
                 )}
@@ -59,15 +54,15 @@ export default function LearningPaths() {
             </div>
             <button
               disabled={cat.status === 'locked'}
-              className={`mt-3 w-full touch-target py-2 rounded-lg text-sm font-semibold ${
+              className={`mt-3 w-full touch-target py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                 cat.status === 'locked'
-                  ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                  ? 'bg-white/5 text-gray-500 cursor-not-allowed'
                   : cat.status === 'in-progress'
-                  ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                  ? 'bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 hover:shadow-lg hover:shadow-purple-500/20'
+                  : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/30 hover:scale-[1.02]'
               }`}
             >
-              {cat.status === 'locked' ? 'Locked (Prerequisite Needed)' : `${getStatusLabel(cat.status)} (${cat.modules} Modules)`}
+              {cat.status === 'locked' ? '🔒 Locked (Prerequisite Needed)' : `${cat.status === 'in-progress' ? '▶️ Continue' : '🚀 Start'} Path (${cat.modules} Modules)`}
             </button>
           </div>
         ))}
