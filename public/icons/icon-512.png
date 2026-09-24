@@ -1,0 +1,2 @@
+// Placeholder icon - will be replaced with actual icon files
+// Generate with: npx sharp input.png -resize 512x512 output.png
