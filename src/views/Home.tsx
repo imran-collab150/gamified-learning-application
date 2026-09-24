@@ -26,28 +26,28 @@ export default function Home() {
       <Header onToggleSidebar={() => setSidebarOpen(true)} />
 
       <main className="relative z-10 pt-2 main-content">
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto content-wrapper">
           {/* Hero Section */}
-          <div className="glass-card rounded-2xl p-8 mb-8 gradient-border animate-fade-in-up">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-              <div className="flex-1">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-3">
+          <div className="glass-card rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 gradient-border animate-fade-in-up">
+            <div className="hero-layout">
+              <div className="flex-1 text-center lg:text-left">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
                   Welcome back, <span className="gradient-text">Learner</span>
                 </h1>
-                <p className="text-lg text-gray-400 mb-6 max-w-lg">
+                <p className="text-base sm:text-lg text-gray-400 mb-6 max-w-lg mx-auto lg:mx-0">
                   Continue your journey to master new micro-skills. You're <span className="text-orange-400 font-semibold">5 days</span> into your streak!
                 </p>
-                <div className="flex gap-4">
-                  <button className="btn-primary touch-target px-8 py-3 text-base">
+                <div className="flex gap-3 sm:gap-4 justify-center lg:justify-start">
+                  <button className="btn-primary touch-target px-6 sm:px-8 py-3 text-base">
                     🚀 Continue Learning
                   </button>
-                  <button className="touch-target px-8 py-3 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/10 transition-all duration-300 text-base">
+                  <button className="touch-target px-6 sm:px-8 py-3 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/10 transition-all duration-300 text-base">
                     📖 Browse Paths
                   </button>
                 </div>
               </div>
               <div className="flex-shrink-0">
-                <div className="touch-target w-32 h-32 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-5xl animate-float">
+                <div className="touch-target w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-3xl sm:text-4xl lg:text-5xl animate-float">
                   ⚡📚
                 </div>
               </div>
@@ -55,7 +55,7 @@ export default function Home() {
           </div>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="stats-row mb-6 sm:mb-8">
             {[
               { label: 'XP Earned', value: '2,840', icon: '⚡', color: '#f59e0b' },
               { label: 'Current Level', value: '17', icon: '🏆', color: '#8b5cf6' },
@@ -64,20 +64,20 @@ export default function Home() {
             ].map((stat, i) => (
               <div
                 key={stat.label}
-                className="glass-card rounded-xl p-5 animate-fade-in-up"
+                className="stat-card rounded-xl p-4 sm:p-5 animate-fade-in-up"
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{stat.icon}</span>
+                  <span className="text-xl sm:text-2xl">{stat.icon}</span>
                   <span className="text-sm text-gray-400">{stat.label}</span>
                 </div>
-                <p className="text-2xl font-bold text-white">{stat.value}</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">{stat.value}</p>
               </div>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2">
+          <div className="daily-quick-grid mb-6 sm:mb-8">
+            <div>
               <DailyGoals />
             </div>
             <div>

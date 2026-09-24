@@ -13,7 +13,7 @@ export default function SidebarNav({ activePage, setActivePage, isOpen, onClose 
         <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={onClose} />
       )}
       <aside
-        className={`fixed left-0 top-0 h-full w-64 glass border-r border-transparent z-50 transform transition-transform duration-300 ease-out lg:relative lg:translate-x-0 lg:z-0 ${
+        className={`fixed left-0 top-0 h-full w-[280px] glass border-r border-transparent z-50 transform transition-transform duration-300 ease-out lg:relative lg:translate-x-0 lg:z-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

@@ -15,7 +15,7 @@ export default function Profile({ onToggleSidebar }: { onToggleSidebar: () => vo
 
       <Header onToggleSidebar={onToggleSidebar} />
       <main className="relative z-10 pt-2 main-content">
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto content-wrapper">
           <h2 className="text-2xl font-bold gradient-text mb-4">Profile</h2>
           <div className="glass-card rounded-2xl p-6 animate-fade-in-up">
             <div className="flex items-center gap-4 mb-6">

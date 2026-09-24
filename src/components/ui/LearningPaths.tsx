@@ -13,23 +13,23 @@ export default function LearningPaths() {
   const { categories } = useGameStore();
 
   return (
-    <div className="mb-8">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold text-white">Explore Learning Paths</h3>
+    <div className="mb-6 sm:mb-8">
+      <div className="section-header">
+        <h3 className="section-title">Explore Learning Paths</h3>
         <button className="touch-target text-blue-400 hover:text-blue-300 text-sm font-semibold transition-colors">
           View All →
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="learning-paths-grid">
         {categories.map((cat, index) => (
           <div
             key={cat.id}
-            className="glass-card rounded-xl p-5 cursor-pointer group animate-fade-in-up"
+            className="glass-card rounded-xl p-4 sm:p-5 cursor-pointer group animate-fade-in-up"
             style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}
           >
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div
-                className="touch-target w-14 h-14 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                className="touch-target w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-2xl sm:text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
                 style={{
                   background: `linear-gradient(135deg, ${cat.color}20, ${cat.color}10)`,
                   boxShadow: `0 4px 16px ${cat.color}20`,
@@ -38,8 +38,8 @@ export default function LearningPaths() {
                 {cat.icon}
               </div>
               <div className="flex-1">
-                <h4 className="font-bold text-white text-base">{cat.title}</h4>
-                <p className="text-sm text-gray-400 mt-0.5">{cat.subtitle}</p>
+                <h4 className="font-bold text-white text-sm sm:text-base">{cat.title}</h4>
+                <p className="text-xs sm:text-sm text-gray-400 mt-0.5">{cat.subtitle}</p>
               </div>
             </div>
             <div className="flex items-center justify-between">
@@ -58,7 +58,7 @@ export default function LearningPaths() {
               )}
               <button
                 disabled={cat.status === 'locked'}
-                className={`touch-target px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                className={`touch-target px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
                   cat.status === 'locked'
                     ? 'bg-white/5 text-gray-500 cursor-not-allowed'
                     : cat.status === 'in-progress'
