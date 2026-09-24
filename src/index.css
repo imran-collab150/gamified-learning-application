@@ -2,12 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --bg-header: #1f2937;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-header: #ffffff;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-header: #030712;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-header: #f9fafb;
+  --border-color: #374151;
+  --card-bg: #1f2937;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background-color: #0a0a1a;
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
