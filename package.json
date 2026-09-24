@@ -3,12 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://imran-collab150.github.io/gamified-learning-application",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "server": "tsx server/index.ts",
-    "dev:all": "concurrently \"npm run dev\" \"npm run server\""
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
+    "deploy": "vite build && copy \"dist\\index.html\" \"dist\\404.html\" /Y && gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -40,6 +42,7 @@
     "@tailwindcss/vite": "^4.0.0",
     "typescript": "^5.7.0",
     "tsx": "^4.19.0",
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "gh-pages": "^6.3.0"
   }
 }
