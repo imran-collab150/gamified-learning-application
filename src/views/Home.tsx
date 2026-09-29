@@ -1,17 +1,11 @@
-import { useState } from 'react';
-import Header from '../components/ui/Header';
-import SidebarNav from '../components/ui/SidebarNav';
 import DailyGoals from '../components/ui/DailyGoals';
 import LearningPaths from '../components/ui/LearningPaths';
 import CommunityHighlights from '../components/ui/CommunityHighlights';
 import QuickStats from '../components/ui/QuickStats';
 
 export default function Home() {
-  const [activePage, setActivePage] = useState('home');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
-    <div className="min-h-screen relative">
+    <div className="relative pb-20 lg:pb-0">
       {/* Ambient floating particles */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="particle top-[10%] left-[20%] w-2 h-2" style={{ animationDelay: '0s' }} />
@@ -22,73 +16,69 @@ export default function Home() {
         <div className="particle top-[70%] left-[30%] w-1 h-1" style={{ animationDelay: '5s' }} />
       </div>
 
-      <SidebarNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <Header onToggleSidebar={() => setSidebarOpen(true)} />
-
-      <main className="relative z-10 pt-2 main-content">
-        <div className="max-w-7xl mx-auto content-wrapper">
-          {/* Hero Section */}
-          <div className="glass-card rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 gradient-border animate-fade-in-up">
-            <div className="hero-layout">
-              <div className="flex-1 text-center lg:text-left">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
-                  Welcome back, <span className="gradient-text">Learner</span>
-                </h1>
-                <p className="text-base sm:text-lg text-gray-400 mb-6 max-w-lg mx-auto lg:mx-0">
-                  Continue your journey to master new micro-skills. You're <span className="text-orange-400 font-semibold">5 days</span> into your streak!
-                </p>
-                <div className="flex gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <button className="btn-primary touch-target px-6 sm:px-8 py-3 text-base">
-                    🚀 Continue Learning
-                  </button>
-                  <button className="touch-target px-6 sm:px-8 py-3 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/10 transition-all duration-300 text-base">
-                    📖 Browse Paths
-                  </button>
-                </div>
+      <div className="relative z-10 px-4 sm:px-6 py-6 sm:py-8">
+        {/* Hero Section */}
+        <div className="glass-card rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 gradient-border animate-fade-in-up">
+          <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
+            <div className="flex-1 text-center lg:text-left">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
+                Welcome back, <span className="gradient-text">Learner</span>
+              </h1>
+              <p className="text-base sm:text-lg text-gray-400 mb-6 max-w-lg mx-auto lg:mx-0">
+                Continue your journey to master new micro-skills. You're <span className="text-orange-400 font-semibold">5 days</span> into your streak!
+              </p>
+              <div className="flex gap-3 sm:gap-4 justify-center lg:justify-start">
+                <button className="btn-primary touch-target px-6 sm:px-8 py-3 text-base">
+                  🚀 Continue Learning
+                </button>
+                <button className="touch-target px-6 sm:px-8 py-3 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/10 transition-all duration-300 text-base">
+                  📖 Browse Paths
+                </button>
               </div>
-              <div className="flex-shrink-0">
-                <div className="touch-target w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-3xl sm:text-4xl lg:text-5xl animate-float">
-                  ⚡📚
-                </div>
+            </div>
+            <div className="flex-shrink-0">
+              <div className="touch-target w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-3xl sm:text-4xl lg:text-5xl animate-float">
+                ⚡📚
               </div>
             </div>
           </div>
-
-          {/* Stats Row */}
-          <div className="stats-row mb-6 sm:mb-8">
-            {[
-              { label: 'XP Earned', value: '2,840', icon: '⚡', color: '#f59e0b' },
-              { label: 'Current Level', value: '17', icon: '🏆', color: '#8b5cf6' },
-              { label: 'Streak', value: '5 Days', icon: '🔥', color: '#ef4444' },
-              { label: 'Modules Done', value: '23', icon: '📚', color: '#3b82f6' },
-            ].map((stat, i) => (
-              <div
-                key={stat.label}
-                className="stat-card rounded-xl p-4 sm:p-5 animate-fade-in-up"
-                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xl sm:text-2xl">{stat.icon}</span>
-                  <span className="text-sm text-gray-400">{stat.label}</span>
-                </div>
-                <p className="text-xl sm:text-2xl font-bold text-white">{stat.value}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="daily-quick-grid mb-6 sm:mb-8">
-            <div>
-              <DailyGoals />
-            </div>
-            <div>
-              <QuickStats />
-            </div>
-          </div>
-
-          <LearningPaths />
-          <CommunityHighlights />
         </div>
-      </main>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          {[
+            { label: 'XP Earned', value: '2,840', icon: '⚡', color: '#f59e0b' },
+            { label: 'Current Level', value: '17', icon: '🏆', color: '#8b5cf6' },
+            { label: 'Streak', value: '5 Days', icon: '🔥', color: '#ef4444' },
+            { label: 'Modules Done', value: '23', icon: '📚', color: '#3b82f6' },
+          ].map((stat, i) => (
+            <div
+              key={stat.label}
+              className="stat-card rounded-xl p-4 sm:p-5 animate-fade-in-up"
+              style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xl sm:text-2xl">{stat.icon}</span>
+                <span className="text-sm text-gray-400">{stat.label}</span>
+              </div>
+              <p className="text-xl sm:text-2xl font-bold text-white">{stat.value}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Daily Goals + Quick Stats (2-col on tablet, 3-col on desktop) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <div className="lg:col-span-2">
+            <DailyGoals />
+          </div>
+          <div>
+            <QuickStats />
+          </div>
+        </div>
+
+        <LearningPaths />
+        <CommunityHighlights />
+      </div>
     </div>
   );
 }

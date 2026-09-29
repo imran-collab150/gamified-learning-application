@@ -6,7 +6,7 @@ export default function QuickStats() {
   const xpPercent = Math.min((user.xp / requiredXP) * 100, 100);
 
   return (
-    <div className="quick-stats-layout glass-card rounded-2xl p-5 sm:p-6 animate-fade-in-up">
+    <div className="w-full glass-card rounded-2xl p-5 sm:p-6 animate-fade-in-up">
       <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Quick Stats</h3>
       <div className="space-y-4 sm:space-y-5">
         <div>

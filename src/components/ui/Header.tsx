@@ -21,11 +21,11 @@ export default function Header({ onToggleSidebar }: { onToggleSidebar: () => voi
   };
 
   return (
-    <header className="glass sticky top-0 z-50 px-4 sm:px-6 py-3 flex items-center justify-between border-b border-transparent">
+    <header className="glass sticky top-0 z-50 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between border-b border-transparent">
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleSidebar}
-          className="touch-target w-10 h-10 rounded-lg glass flex items-center justify-center text-lg border border-transparent hover:border-white/20 transition-all duration-300 lg:hidden"
+          className="touch-target w-10 h-10 rounded-lg glass flex items-center justify-center text-lg border border-transparent hover:border-white/20 transition-all duration-300 sm:hidden"
         >
           ☰
         </button>

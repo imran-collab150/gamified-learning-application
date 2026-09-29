@@ -44,8 +44,8 @@ export default function DailyGoals() {
 
   return (
     <div className="glass-card rounded-2xl p-5 sm:p-6 animate-fade-in-up">
-      <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <div>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 mb-4 sm:mb-6">
+        <div className="text-center sm:text-left">
           <h3 className="text-lg sm:text-xl font-bold text-white">Daily Goals</h3>
           <p className="text-sm text-gray-400 mt-1">
             Current Streak: <span className="text-orange-400 font-semibold">🔥 {streak} Days</span>
@@ -53,8 +53,8 @@ export default function DailyGoals() {
         </div>
         <ProgressRing progress={dailyGoalProgress} color="#8b5cf6" />
       </div>
-      <div className="flex items-center justify-between mb-3 sm:mb-4">
-        <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 gap-3 sm:gap-0">
+        <div className="flex justify-center sm:justify-start gap-2">
           {days.map((day, i) => (
             <div
               key={day}
@@ -68,7 +68,7 @@ export default function DailyGoals() {
             </div>
           ))}
         </div>
-        <span className="text-sm text-gray-400">
+        <span className="text-sm text-gray-400 text-center sm:text-right">
           {modulesCompletedToday}/{modulesGoalToday}
         </span>
       </div>
